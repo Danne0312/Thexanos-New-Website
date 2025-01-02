@@ -342,3 +342,32 @@ header {
     grid-template-columns: 1fr;
   }
 }
+
+.site-footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px 0;
+}
+
+.footer-text {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-text {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.footer-text:hover .default-text {
+    display: none;
+}
+
+.footer-text:hover .hover-text {
+    display: block;
+}
