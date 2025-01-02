@@ -303,9 +303,9 @@ header {
     border-radius: 8px;
   }
 
-  .stream-preview img {
-    max-height: 200px;
-    object-fit: cover;
+  .stream-preview iframe {
+    height: 200px;  /* Adjust this value to control the rectangle height */
+    width: 100%;
   }
 
   .stream-info {
