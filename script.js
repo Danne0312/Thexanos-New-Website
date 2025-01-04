@@ -139,8 +139,23 @@ class WheelOfFortune {
         ];
         this.startAngle = 0;
         this.isSpinning = false;
+        this.rotationSpeed = 0.02; // Controls how fast the wheel spins
+        this.isAutoSpinning = true; // New property to track auto-spinning state
+        this.animationFrameId = null; // To store the animation frame ID
         
-        document.getElementById('spin-btn').addEventListener('click', () => this.spin());
+        document.getElementById('spin-btn').addEventListener('click', () => {
+            this.isAutoSpinning = !this.isAutoSpinning;
+            const spinBtn = document.getElementById('spin-btn');
+            spinBtn.textContent = this.isAutoSpinning ? 'STOP' : 'SPIN';
+            
+            if (this.isAutoSpinning) {
+                this.startAutoSpin();
+            } else {
+                this.stopAutoSpin();
+            }
+        });
+
+        this.startAutoSpin();
     }
 
     drawWheel() {
@@ -194,42 +209,21 @@ class WheelOfFortune {
         this.ctx.stroke();
     }
 
-    spin() {
-        if (this.isSpinning) return;
-        this.isSpinning = true;
-        const spins = 20;
-        const duration = 20000;
-        const startTime = performance.now();
-        const startAngle = this.startAngle;
-        
-        // Calculate a safe landing angle that avoids the VIP segment
-        const vipSegmentStart = 3 * (2 * Math.PI / 5.5); // Start of VIP segment
-        const vipSegmentEnd = vipSegmentStart + (2 * Math.PI / 11); // End of VIP segment
-        
-        // Generate a random angle that's not in the VIP segment
-        let randomAngle;
-        do {
-            randomAngle = Math.random() * 2 * Math.PI;
-        } while (randomAngle > vipSegmentStart - 0.2 && randomAngle < vipSegmentEnd + 0.2); // Added buffer
-        
-        const totalRotation = (spins * 2 * Math.PI) + randomAngle;
-
-        const animate = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easing = 1 - Math.pow(1 - progress, 3);
-            
-            this.startAngle = startAngle + totalRotation * easing;
+    startAutoSpin() {
+        const animate = () => {
+            if (!this.isAutoSpinning) return;
+            this.startAngle += this.rotationSpeed;
             this.drawWheel();
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            } else {
-                this.isSpinning = false;
-            }
+            this.animationFrameId = requestAnimationFrame(animate);
         };
+        animate();
+    }
 
-        requestAnimationFrame(animate);
+    stopAutoSpin() {
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
     }
 }
 
@@ -238,5 +232,4 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchLatestVideos();
     fetchLatestClips();
     const wheel = new WheelOfFortune();
-    wheel.drawWheel();
 }); 
