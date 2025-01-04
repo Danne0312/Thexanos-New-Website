@@ -139,91 +139,244 @@ class WheelOfFortune {
         ];
         this.startAngle = 0;
         this.isSpinning = false;
-        this.rotationSpeed = 0.02; // Controls how fast the wheel spins
-        this.isAutoSpinning = true; // New property to track auto-spinning state
-        this.animationFrameId = null; // To store the animation frame ID
+        this.rotationSpeed = 0.02;
+        this.scale = 1;
+        this.yOffset = 0;
+        this.opacity = 1;
+        
+        this.colors = {
+            primary: ['#4B0082', '#663399'],    // Deep purple alternating
+            vip: ['#FFD700', '#FFA500'],        // Gold gradient for VIP
+            border: '#B8860B',                  // Dark gold border
+            text: '#FFFFFF',                    // White text
+            pointer: '#FF4500',                 // Orange-red pointer
+            shine: 'rgba(255, 255, 255, 0.2)'   // White shine effect
+        };
+        
+        // Start normal spinning animation
+        this.animate();
         
         document.getElementById('spin-btn').addEventListener('click', () => {
-            this.isAutoSpinning = !this.isAutoSpinning;
-            const spinBtn = document.getElementById('spin-btn');
-            spinBtn.textContent = this.isAutoSpinning ? 'STOP' : 'SPIN';
-            
-            if (this.isAutoSpinning) {
-                this.startAutoSpin();
-            } else {
-                this.stopAutoSpin();
+            if (!this.isSpinning) {
+                this.startSpinAway();
             }
         });
 
-        this.startAutoSpin();
+        // Add a method to check which option the pointer is pointing at
+        this.currentSegment = null;
+    }
+
+    animate() {
+        if (this.isSpinning) return; // Don't continue normal animation if spinning away
+        
+        this.startAngle += this.rotationSpeed;
+        this.drawWheel();
+        requestAnimationFrame(() => this.animate());
     }
 
     drawWheel() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        const centerX = this.canvas.width / 2;
-        const centerY = this.canvas.height / 2;
-        const radius = Math.min(centerX, centerY) - 10;
+        
+        // Apply transformations
+        this.ctx.save();
+        this.ctx.globalAlpha = this.opacity;
+        this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2 - this.yOffset);
+        this.ctx.scale(this.scale, this.scale);
+        
+        const radius = Math.min(this.canvas.width / 2, this.canvas.height / 2) - 20;
+        
+        // Enhanced outer metallic ring with multiple gradients
+        const outerGradient = this.ctx.createLinearGradient(-radius, -radius, radius, radius);
+        outerGradient.addColorStop(0, '#FFD700');    // Gold
+        outerGradient.addColorStop(0.3, '#FFF8DC');  // Light gold
+        outerGradient.addColorStop(0.5, '#FFD700');  // Gold
+        outerGradient.addColorStop(0.7, '#FFF8DC');  // Light gold
+        outerGradient.addColorStop(1, '#FFD700');    // Gold
+        
+        this.ctx.beginPath();
+        this.ctx.arc(0, 0, radius + 10, 0, Math.PI * 2);
+        this.ctx.strokeStyle = outerGradient;
+        this.ctx.lineWidth = 10;
+        this.ctx.stroke();
 
-        // Calculate total angle excluding the small slice
-        const regularSlice = 2 * Math.PI / 5.5;  // Adjusted for 5.5 segments instead of 6
-        const smallSlice = regularSlice / 2;    // Half size for prize slice
-        const totalAngle = 2 * Math.PI;         // Complete circle
-
-        // Draw wheel segments
+        // Draw segments with enhanced gradients
+        const regularSlice = 2 * Math.PI / 5.5;
+        const smallSlice = regularSlice / 2;
         let currentAngle = this.startAngle;
+
         for (let i = 0; i < this.options.length; i++) {
-            // Determine slice size
             const sliceSize = this.options[i] === 'WIN VIP! 💎' ? smallSlice : regularSlice;
             
-            // Draw slice
+            // Create enhanced segment gradient
+            const segmentGradient = this.ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
+            if (this.options[i] === 'WIN VIP! 💎') {
+                segmentGradient.addColorStop(0, '#FFD700');      // Center gold
+                segmentGradient.addColorStop(0.5, '#FFA500');    // Middle orange-gold
+                segmentGradient.addColorStop(1, '#B8860B');      // Edge darker gold
+            } else {
+                segmentGradient.addColorStop(0, this.colors.primary[i % 2]);
+                segmentGradient.addColorStop(0.7, this.darkenColor(this.colors.primary[i % 2], 20));
+                segmentGradient.addColorStop(1, this.darkenColor(this.colors.primary[i % 2], 40));
+            }
+
+            // Draw base segment
             this.ctx.beginPath();
-            this.ctx.moveTo(centerX, centerY);
-            this.ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceSize);
-            this.ctx.fillStyle = i % 2 ? '#483D8B' : '#6A5ACD';
+            this.ctx.moveTo(0, 0);
+            this.ctx.arc(0, 0, radius, currentAngle, currentAngle + sliceSize);
+            this.ctx.lineTo(0, 0);
+            this.ctx.fillStyle = segmentGradient;
             this.ctx.fill();
             
-            // Draw text
+            // Add shine effect
+            const shineGradient = this.ctx.createRadialGradient(
+                Math.cos(currentAngle + sliceSize/2) * radius/2,
+                Math.sin(currentAngle + sliceSize/2) * radius/2,
+                0,
+                Math.cos(currentAngle + sliceSize/2) * radius/2,
+                Math.sin(currentAngle + sliceSize/2) * radius/2,
+                radius/2
+            );
+            shineGradient.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+            shineGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
+            shineGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            
+            this.ctx.fillStyle = shineGradient;
+            this.ctx.fill();
+            
+            // Add metallic border
+            this.ctx.strokeStyle = this.colors.border;
+            this.ctx.lineWidth = 2;
+            this.ctx.stroke();
+
+            // Draw text (existing text drawing code)
             this.ctx.save();
-            this.ctx.translate(centerX, centerY);
             this.ctx.rotate(currentAngle + sliceSize / 2);
             this.ctx.textAlign = 'right';
-            this.ctx.fillStyle = 'white';
-            this.ctx.font = '12px Arial';
-            this.ctx.fillText(this.options[i], radius - 10, 5);
+            this.ctx.fillStyle = this.colors.text;
+            
+            if (this.options[i] === 'WIN VIP! 💎') {
+                this.ctx.font = 'bold 12px Arial';
+                this.ctx.fillStyle = '#FFFFFF';
+                this.ctx.strokeStyle = '#FFD700';
+                this.ctx.lineWidth = 0.5;
+                this.ctx.strokeText(this.options[i], radius - 25, 4);
+            } else {
+                this.ctx.font = 'bold 10px Arial';
+            }
+            
+            this.ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+            this.ctx.shadowBlur = 2;
+            this.ctx.shadowOffsetX = 1;
+            this.ctx.shadowOffsetY = 1;
+            
+            this.ctx.fillText(this.options[i], radius - 25, 4);
             this.ctx.restore();
 
-            // Update current angle
             currentAngle += sliceSize;
         }
-
-        // Draw pointer
+        
+        // Enhanced center circle with metallic effect
+        const centerGradient = this.ctx.createRadialGradient(0, 0, 0, 0, 0, 15);
+        centerGradient.addColorStop(0, '#FFD700');
+        centerGradient.addColorStop(0.5, '#FFF8DC');
+        centerGradient.addColorStop(1, '#FFD700');
+        
         this.ctx.beginPath();
-        this.ctx.moveTo(centerX - 10, 10);
-        this.ctx.lineTo(centerX + 10, 10);
-        this.ctx.lineTo(centerX, 25);
-        this.ctx.closePath();
-        this.ctx.fillStyle = '#8A2BE2';
+        this.ctx.arc(0, 0, 15, 0, Math.PI * 2);
+        this.ctx.fillStyle = centerGradient;
         this.ctx.fill();
-        this.ctx.strokeStyle = 'white';
+        this.ctx.strokeStyle = this.colors.border;
+        this.ctx.lineWidth = 2;
+        this.ctx.stroke();
+        
+        this.ctx.restore();
+
+        // Enhanced pointer with metallic gradient
+        const centerX = this.canvas.width / 2;
+        this.ctx.globalAlpha = this.opacity;
+        this.ctx.beginPath();
+        this.ctx.moveTo(centerX - 15, 10);
+        this.ctx.lineTo(centerX + 15, 10);
+        this.ctx.lineTo(centerX, 35);
+        this.ctx.closePath();
+        
+        const pointerGradient = this.ctx.createLinearGradient(centerX - 15, 0, centerX + 15, 35);
+        pointerGradient.addColorStop(0, '#FF6B6B');
+        pointerGradient.addColorStop(0.5, '#FF4500');
+        pointerGradient.addColorStop(1, '#8B0000');
+        
+        this.ctx.fillStyle = pointerGradient;
+        this.ctx.fill();
+        this.ctx.strokeStyle = '#8B0000';
         this.ctx.lineWidth = 2;
         this.ctx.stroke();
     }
 
-    startAutoSpin() {
-        const animate = () => {
-            if (!this.isAutoSpinning) return;
-            this.startAngle += this.rotationSpeed;
-            this.drawWheel();
-            this.animationFrameId = requestAnimationFrame(animate);
-        };
-        animate();
+    // Helper function to darken colors
+    darkenColor(color, percent) {
+        const num = parseInt(color.replace('#', ''), 16),
+              amt = Math.round(2.55 * percent),
+              R = (num >> 16) - amt,
+              G = (num >> 8 & 0x00FF) - amt,
+              B = (num & 0x0000FF) - amt;
+        return '#' + (0x1000000 + (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+            (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+            (B < 255 ? (B < 1 ? 0 : B) : 255)).toString(16).slice(1);
     }
 
-    stopAutoSpin() {
-        if (this.animationFrameId) {
-            cancelAnimationFrame(this.animationFrameId);
-            this.animationFrameId = null;
+    // Add method to calculate which segment is currently at the top
+    getCurrentSegment() {
+        const normalizedAngle = this.startAngle % (2 * Math.PI);
+        let currentAngle = 0;
+        const regularSlice = 2 * Math.PI / 5.5;
+        const smallSlice = regularSlice / 2;
+
+        for (let i = 0; i < this.options.length; i++) {
+            const sliceSize = this.options[i] === 'WIN VIP! 💎' ? smallSlice : regularSlice;
+            if (normalizedAngle >= currentAngle && normalizedAngle < currentAngle + sliceSize) {
+                return this.options[i];
+            }
+            currentAngle += sliceSize;
         }
+        return this.options[0];
+    }
+
+    startSpinAway() {
+        this.isSpinning = true;
+        let spinDuration = 0;
+        const minSpins = 2; // Minimum number of full rotations
+        const spinSpeed = 0.2; // Initial spin speed
+        let currentSpeed = spinSpeed;
+        const deceleration = 0.001; // How quickly the wheel slows down
+
+        const spinAway = () => {
+            if (currentSpeed <= 0) {
+                this.isSpinning = false;
+                const result = this.getCurrentSegment();
+                
+                // If landed on VIP, trigger another spin after a short delay
+                if (result === 'WIN VIP! 💎') {
+                    setTimeout(() => {
+                        if (!this.isSpinning) {
+                            this.startSpinAway();
+                        }
+                    }, 1000);
+                }
+                return;
+            }
+
+            spinDuration += currentSpeed;
+            this.startAngle += currentSpeed;
+            
+            // Only start slowing down after minimum spins
+            if (spinDuration > minSpins * 2 * Math.PI) {
+                currentSpeed -= deceleration;
+            }
+
+            this.drawWheel();
+            requestAnimationFrame(spinAway);
+        };
+        spinAway();
     }
 }
 
