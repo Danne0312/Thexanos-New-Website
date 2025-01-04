@@ -4,6 +4,7 @@
   --secondary-purple: #483D8B;
   --accent-purple: #8A2BE2;
   --text-color: #FFFFFF;
+  --glow-color: rgba(138, 43, 226, 0.6);
 }
 
 * {
@@ -54,9 +55,11 @@ body::after {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 30px var(--glow-color),
+              inset 0 0 20px var(--glow-color);
+  border: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 header {
@@ -64,8 +67,9 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  border-bottom: 2px solid var(--primary-purple);
+  border-bottom: 2px solid var(--accent-purple);
   flex-wrap: wrap;
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
 }
 
 .logo {
@@ -74,6 +78,16 @@ header {
   color: var(--text-color);
   text-decoration: none;
   flex: 1;
+  text-shadow: 0 0 10px var(--glow-color),
+               0 0 20px var(--glow-color),
+               0 0 30px var(--glow-color);
+  transition: text-shadow 0.3s ease;
+}
+
+.logo:hover {
+  text-shadow: 0 0 20px var(--glow-color),
+               0 0 40px var(--glow-color),
+               0 0 60px var(--glow-color);
 }
 
 .social-links {
@@ -87,14 +101,16 @@ header {
 .social-links a {
   color: var(--text-color);
   font-size: 2rem;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   padding: 0 10px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .social-links a:hover {
   color: var(--accent-purple);
   transform: scale(1.1);
-  transition: all 0.3s ease;
+  text-shadow: 0 0 20px var(--glow-color),
+               0 0 40px var(--glow-color);
 }
 
 .hero {
@@ -103,6 +119,16 @@ header {
   margin-top: 50px;
   gap: 40px;
   flex-direction: row;
+  background: rgba(74, 20, 140, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--glow-color);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  backdrop-filter: blur(5px);
+  transition: box-shadow 0.3s ease;
+}
+
+.hero:hover {
+  box-shadow: 0 0 30px var(--glow-color);
 }
 
 .stream-preview {
@@ -130,11 +156,12 @@ header {
   font-size: 2.5rem;
   color: var(--text-color);
   margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .watch-live-btn {
   display: inline-block;
-  background-color: var(--primary-purple);
+  background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
   color: var(--text-color);
   padding: 12px 24px;
   text-decoration: none;
@@ -143,6 +170,10 @@ header {
   transition: background-color 0.3s ease;
   margin-top: 20px;
   animation: bounce 2s infinite;
+  box-shadow: 0 0 15px var(--glow-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes bounce {
@@ -162,6 +193,23 @@ header {
   animation-play-state: paused;
 }
 
+.watch-live-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
 .about-section {
   margin-top: 50px;
   padding: 30px;
@@ -169,11 +217,22 @@ header {
   background: linear-gradient(135deg, var(--secondary-purple) 0%, var(--primary-purple) 100%);
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: rgba(74, 20, 140, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--glow-color);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  backdrop-filter: blur(5px);
+  transition: box-shadow 0.3s ease;
+}
+
+.about-section:hover {
+  box-shadow: 0 0 30px var(--glow-color);
 }
 
 .about-section h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .about-section p {
@@ -186,11 +245,22 @@ header {
   border-radius: 12px;
   background: linear-gradient(135deg, var(--primary-purple) 0%, var(--accent-purple) 100%);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: rgba(74, 20, 140, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--glow-color);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  backdrop-filter: blur(5px);
+  transition: box-shadow 0.3s ease;
+}
+
+.youtube-section:hover {
+  box-shadow: 0 0 30px var(--glow-color);
 }
 
 .youtube-section h2 {
   text-align: center;
   margin-bottom: 30px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .youtube-grid {
@@ -203,14 +273,17 @@ header {
 .youtube-video {
   width: 100%;
   max-width: 350px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(74, 20, 140, 0.4);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+  border: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 .youtube-video:hover {
   transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.5);
 }
 
 .youtube-video img {
@@ -226,6 +299,7 @@ header {
 .video-info h3 {
   font-size: 1rem;
   margin-bottom: 8px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .video-info p {
@@ -239,11 +313,22 @@ header {
   border-radius: 12px;
   background: linear-gradient(135deg, var(--accent-purple) 0%, var(--secondary-purple) 100%);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: rgba(74, 20, 140, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--glow-color);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  backdrop-filter: blur(5px);
+  transition: box-shadow 0.3s ease;
+}
+
+.twitch-clips-section:hover {
+  box-shadow: 0 0 30px var(--glow-color);
 }
 
 .twitch-clips-section h2 {
   text-align: center;
   margin-bottom: 30px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .clips-grid {
@@ -256,14 +341,17 @@ header {
 .twitch-clip {
   width: 100%;
   max-width: 350px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(74, 20, 140, 0.4);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+  border: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 .twitch-clip:hover {
   transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.5);
 }
 
 .clip-info {
@@ -273,6 +361,7 @@ header {
 .clip-info h3 {
   font-size: 1rem;
   margin-bottom: 8px;
+  text-shadow: 0 0 10px var(--glow-color);
 }
 
 .clip-info p {
@@ -353,7 +442,9 @@ header {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 -5px 15px var(--glow-color);
+    border-top: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 .footer-text {
@@ -381,25 +472,131 @@ header {
     margin-top: 30px;
     text-align: center;
     margin-bottom: 100px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Improve wheel glow effect */
 #wheel {
     max-width: 300px;
     margin: 20px auto;
     display: block;
+    filter: drop-shadow(0 0 20px var(--glow-color));
+    position: relative;
+    z-index: 2;
 }
 
+/* Remove the wheel glow animation to prevent interference with spinning */
+/* Remove the wheel container border that was causing circular shape issues */
+.wheel-container::before {
+    content: none;
+}
+
+/* Adjust sparkle positions to be more visually appealing */
+.sparkle {
+    position: absolute;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sparkle:nth-child(1) {
+    top: 10%;
+    left: 10%;
+    animation: sparkle 1.5s infinite;
+}
+
+.sparkle:nth-child(2) {
+    top: 10%;
+    right: 10%;
+    animation: sparkle 1.5s infinite 0.5s;
+}
+
+.sparkle:nth-child(3) {
+    bottom: 10%;
+    left: 10%;
+    animation: sparkle 1.5s infinite 1s;
+}
+
+.sparkle:nth-child(4) {
+    bottom: 10%;
+    right: 10%;
+    animation: sparkle 1.5s infinite 1.5s;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Enhanced spin button */
 #spin-btn {
     background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 15px 30px;
+    border-radius: 25px;
     cursor: pointer;
     margin: 10px;
-    transition: transform 0.3s ease;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px var(--glow-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 3;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 #spin-btn:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 30px var(--glow-color);
+}
+
+#spin-btn:active {
+    transform: scale(0.95);
+}
+
+/* Improved shine effect */
+#spin-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    20%, 100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* Shiny animations */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px var(--glow-color);
+    }
+    50% {
+        box-shadow: 0 0 30px var(--glow-color);
+    }
+}
+
+/* Add ambient glow to sections */
+section {
+    animation: glow 3s infinite;
 }
