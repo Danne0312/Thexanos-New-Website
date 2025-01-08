@@ -367,8 +367,14 @@ class WheelOfFortune {
         const spinAway = () => {
             if (currentSpeed <= 0) {
                 this.isSpinning = false;
-                const result = this.getCurrentSegment();
-                
+                let result = this.getCurrentSegment();
+
+                // Ensure the result is not "WIN VIP! 💎"
+                while (result === 'WIN VIP! 💎') {
+                    this.startAngle += Math.PI / 2; // Adjust the angle to avoid landing on VIP
+                    result = this.getCurrentSegment();
+                }
+
                 // If landed on VIP, trigger another spin after a short delay
                 if (result === 'WIN VIP! 💎') {
                     setTimeout(() => {
@@ -382,7 +388,7 @@ class WheelOfFortune {
 
             spinDuration += currentSpeed;
             this.startAngle += currentSpeed;
-            
+
             // Only start slowing down after minimum spins
             if (spinDuration > minSpins * 2 * Math.PI) {
                 currentSpeed -= deceleration;
