@@ -358,44 +358,13 @@ class WheelOfFortune {
 
     startSpinAway() {
         this.isSpinning = true;
-        let spinDuration = 0;
-        const minSpins = 2; // Minimum number of full rotations
         const spinSpeed = 0.2; // Initial spin speed
-        let currentSpeed = spinSpeed;
-        const deceleration = 0.001; // How quickly the wheel slows down
 
         const spinAway = () => {
-            if (currentSpeed <= 0) {
-                this.isSpinning = false;
-                let result = this.getCurrentSegment();
-
-                // Ensure the result is not "WIN VIP! 💎"
-                while (result === 'WIN VIP! 💎') {
-                    this.startAngle += Math.PI / 2; // Adjust the angle to avoid landing on VIP
-                    result = this.getCurrentSegment();
-                }
-
-                // If landed on VIP, trigger another spin after a short delay
-                if (result === 'WIN VIP! 💎') {
-                    setTimeout(() => {
-                        if (!this.isSpinning) {
-                            this.startSpinAway();
-                        }
-                    }, 1000);
-                }
-                return;
-            }
-
-            spinDuration += currentSpeed;
-            this.startAngle += currentSpeed;
-
-            // Only start slowing down after minimum spins
-            if (spinDuration > minSpins * 2 * Math.PI) {
-                currentSpeed -= deceleration;
-            }
+            this.startAngle += spinSpeed; // Continuously increase the angle
 
             this.drawWheel();
-            requestAnimationFrame(spinAway);
+            requestAnimationFrame(spinAway); // Keep spinning indefinitely
         };
         spinAway();
     }
