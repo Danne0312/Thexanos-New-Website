@@ -21,6 +21,24 @@ function displayVideos(videos) {
     const container = document.getElementById('youtube-videos');
     container.innerHTML = '';
 
+    // Add the specific video from the provided link
+    const specificVideo = {
+        id: { videoId: 'isD7j-SRVGA' },
+        snippet: {
+            title: 'Thexanos Music', // Replace with the actual title
+            thumbnails: {
+                high: {
+                    url: 'https://img.youtube.com/vi/isD7j-SRVGA/hqdefault.jpg' // Thumbnail URL
+                }
+            }
+        }
+    };
+
+    // Append the specific video first
+    const specificVideoElement = createVideoElement(specificVideo);
+    container.appendChild(specificVideoElement);
+
+    // Then append the fetched videos
     videos.forEach(video => {
         if (video.id.videoId) {
             const videoElement = createVideoElement(video);
@@ -33,14 +51,11 @@ function createVideoElement(video) {
     const div = document.createElement('div');
     div.className = 'youtube-video';
     
-    const date = new Date(video.snippet.publishedAt).toLocaleDateString();
-    
     div.innerHTML = `
         <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
             <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.title}">
             <div class="video-info">
                 <h3>${video.snippet.title}</h3>
-                <p>${date}</p>
             </div>
         </a>
     `;
