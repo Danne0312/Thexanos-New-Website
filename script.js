@@ -358,15 +358,40 @@ class WheelOfFortune {
 
     startSpinAway() {
         this.isSpinning = true;
-        const spinSpeed = 0.2; // Initial spin speed
+        const spinDuration = 30000; // Spin for 30 seconds
+        const startTime = performance.now(); // Record the start time
+        const initialSpeed = 0.2; // Initial spin speed
+        let currentSpeed = initialSpeed;
 
-        const spinAway = () => {
-            this.startAngle += spinSpeed; // Continuously increase the angle
+        const spinAway = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
 
-            this.drawWheel();
-            requestAnimationFrame(spinAway); // Keep spinning indefinitely
+            // Continue spinning for the specified duration
+            if (elapsedTime < spinDuration) {
+                this.startAngle += currentSpeed; // Increase the angle
+                this.drawWheel();
+
+                // Adjust speed based on the remaining time
+                const remainingTime = spinDuration - elapsedTime;
+                currentSpeed = initialSpeed * (remainingTime / spinDuration); // Decrease speed as time goes on
+
+                requestAnimationFrame(spinAway); // Keep spinning
+            } else {
+                // Gradually slow down the wheel after 30 seconds
+                const stopSpin = () => {
+                    if (currentSpeed > 0) {
+                        this.startAngle += currentSpeed; // Continue to spin
+                        currentSpeed -= 0.01; // Decrease speed gradually
+                        this.drawWheel();
+                        requestAnimationFrame(stopSpin); // Continue until speed is zero
+                    } else {
+                        this.isSpinning = false; // Stop spinning
+                    }
+                };
+                stopSpin();
+            }
         };
-        spinAway();
+        requestAnimationFrame(spinAway);
     }
 }
 
