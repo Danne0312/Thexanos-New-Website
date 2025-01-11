@@ -400,4 +400,21 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchLatestVideos();
     fetchLatestClips();
     const wheel = new WheelOfFortune();
-}); 
+});
+
+const xanonoImage = document.getElementById('xanonoImage');
+
+// Function to switch images
+let isXanono = true; // Track which image is currently displayed
+
+function switchImage() {
+    if (isXanono) {
+        xanonoImage.src = 'xannystare.png'; // Change to hover image
+    } else {
+        xanonoImage.src = 'xanono.png'; // Change back to original image
+    }
+    isXanono = !isXanono; // Toggle the image state
+}
+
+// Set interval to switch images every 2 seconds (2000 milliseconds)
+setInterval(switchImage, 2000); 
