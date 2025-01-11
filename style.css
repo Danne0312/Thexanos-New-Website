@@ -64,12 +64,15 @@ body::after {
 
 header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 2px solid var(--accent-purple);
-  flex-wrap: wrap;
-  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+  justify-content: flex-start;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
@@ -77,7 +80,7 @@ header {
   font-weight: bold;
   color: var(--text-color);
   text-decoration: none;
-  flex: 1;
+  margin-right: 10px;
   text-shadow: 0 0 10px var(--glow-color),
                0 0 20px var(--glow-color),
                0 0 30px var(--glow-color);
@@ -631,4 +634,72 @@ section {
 .action-button:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px var(--glow-color);
+}
+
+.logo-container {
+    text-align: center; /* Center the logo */
+}
+
+.xanono-image {
+    max-height: 50px; /* Set a maximum height for the image */
+    height: auto; /* Maintain aspect ratio */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.xanono-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 50px;
+    height: auto;
+    display: none;
+}
+
+.logo-container:hover .xanono-image {
+    display: none;
+}
+
+.logo-container:hover .xanono-hover {
+    display: block;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #FFD700;
+}
+
+.logo-container {
+    margin-left: 10px;
+}
+
+.xanono-image {
+    max-height: 50px;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #FFD700;
 }
