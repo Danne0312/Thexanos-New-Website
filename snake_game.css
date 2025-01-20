@@ -1,0 +1,134 @@
+body {
+    background-color: #ffffff; /* Elegant white background */
+    color: #333; /* Darker text color for better contrast */
+    font-family: 'Arial', sans-serif; /* Font style */
+    text-align: center; /* Center text */
+}
+
+canvas {
+    border: 4px solid #ffffff; /* Thicker border with a white color */
+    background-color: #ffffff; /* Elegant white canvas background */
+    display: block; /* Center the canvas */
+    margin: 20px auto; /* Margin around the canvas */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Subtle glow effect */
+    border-radius: 10px; /* Rounded corners for the canvas */
+}
+
+.start-game-container {
+    position: relative; /* Position relative to the canvas */
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    align-items: center; /* Center the button vertically */
+    height: 400px; /* Match the height of the canvas */
+    width: 400px; /* Match the width of the canvas */
+    margin: 0 auto; /* Center the container */
+}
+
+#start-game-btn {
+    position: absolute; /* Position absolute to overlay on the canvas */
+    background-color: #ff4757; /* Button color */
+    color: white; /* Text color */
+    padding: 15px 30px; /* Padding */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 20px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+#start-game-btn:hover {
+    background-color: #ff6b81; /* Change color on hover */
+}
+
+.go-back-btn {
+    background-color: #ffffff; /* Elegant white button color */
+    color: #333; /* Darker text color for better contrast */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Align with other elements */
+    margin-top: 20px; /* Space above the button */
+}
+
+.go-back-btn:hover {
+    background-color: #f0f0f0; /* Slightly lighter color on hover */
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with transparency */
+    text-align: center; /* Center text */
+    padding-top: 100px; /* Position the modal */
+}
+
+.modal-content {
+    background-color: #ffffff; /* White background for the modal */
+    margin: auto; /* Center the modal */
+    padding: 20px; /* Padding */
+    border: 1px solid #888; /* Border */
+    width: 300px; /* Width of the modal */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+.modal h2 {
+    color: #ff4757; /* Color for the Game Over text */
+}
+
+.modal p {
+    color: #333; /* Darker text color for better contrast */
+}
+
+#restart-btn {
+    background-color: #ff4757; /* Button color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+#restart-btn:hover {
+    background-color: #ff6b81; /* Change color on hover */
+}
+
+.touch-controls {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons */
+    margin-top: 20px; /* Space above the controls */
+}
+
+.touch-controls > div {
+    display: flex; /* Align left and right buttons horizontally */
+}
+
+.control-btn {
+    background-color: #ff4757; /* Button color */
+    color: white; /* Text color */
+    padding: 20px 30px; /* Increased padding for larger buttons */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 24px; /* Larger font size for arrows */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+    margin: 10px; /* Space between buttons */
+    width: 80px; /* Fixed width for uniformity */
+    height: 80px; /* Fixed height for uniformity */
+}
+
+.control-btn:hover {
+    background-color: #ff6b81; /* Change color on hover */
+} 
