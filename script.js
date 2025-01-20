@@ -404,17 +404,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const xanonoImage = document.getElementById('xanonoImage');
 
-// Function to switch images
-let isXanono = true; // Track which image is currently displayed
+// Change the image on mouse enter
+xanonoImage.addEventListener('mouseenter', () => {
+    xanonoImage.src = 'xannystare.png'; // Change to hover image
+});
 
-function switchImage() {
-    if (isXanono) {
-        xanonoImage.src = 'xannystare.png'; // Change to hover image
-    } else {
-        xanonoImage.src = 'xanono.png'; // Change back to original image
-    }
-    isXanono = !isXanono; // Toggle the image state
-}
-
-// Set interval to switch images every 2 seconds (2000 milliseconds)
-setInterval(switchImage, 2000); 
+// Change back to the original image on mouse leave
+xanonoImage.addEventListener('mouseleave', () => {
+    xanonoImage.src = 'xanono.png'; // Change back to original image
+}); 
