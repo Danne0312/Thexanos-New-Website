@@ -15,11 +15,14 @@
 }
 
 body {
+  background-color: #121212; /* Dark background */
+  color: white; /* Text color */
+  font-family: 'Arial', sans-serif; /* Font style */
+  text-align: center; /* Center text */
   background-image: url('https://images.unsplash.com/photo-1686425374911-e0d752e09806?q=80&w=3293&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  color: var(--text-color);
   line-height: 1.6;
   position: relative;
 }
@@ -702,4 +705,47 @@ section {
 
 .menu a:hover {
     color: #FFD700;
+}
+
+.new-snake-game-btn {
+  background-color: #006eff; /* Button color */
+  color: white; /* Text color */
+  padding: 10px 15px; /* Padding */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s; /* Smooth transition */
+  cursor: pointer; /* Cursor on hover */
+  display: inline-block; /* Display as inline-block */
+  margin-left: 15px; /* Add some space above the button */
+  margin-top: 5px;
+
+}
+
+.new-snake-game-btn:hover {
+  background-color: #006eff90; /* Change color on hover */
+}
+
+canvas {
+    border: 4px solid #ff4757; /* Thicker border with a color */
+    background-color: #000; /* Canvas background */
+    display: block; /* Center the canvas */
+    margin: 20px auto; /* Margin around the canvas */
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.5); /* Glow effect */
+}
+
+#start-game-btn {
+    background-color: #ff4757; /* Button color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+#start-game-btn:hover {
+    background-color: #ff6b81; /* Change color on hover */
 }
