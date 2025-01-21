@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="snake_game.css">
+</head>
+<body>
+    <h1>Xannys Snake Game</h1>
+    <div class="start-game-container">
+        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+        <button id="start-game-btn">Start Game</button>
+    </div>
+
+    <div id="final-score-container">
+        Final Score: <span id="final-score" data-score-hash=""></span>
+    </div>
+
+    <div class="touch-controls">
+        <button class="control-btn" id="up-btn">↑</button>
+        <div>
+            <button class="control-btn" id="left-btn">←</button>
+            <button class="control-btn" id="right-btn">→</button>
+        </div>
+        <button class="control-btn" id="down-btn">↓</button>
+        <p1>Use the arrow keys to move the snake on your screen or keyboard. Eat the food to grow. Avoid the walls and the snake's body!</p1>
+    </div>
+    
+
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2>Game Over!</h2>
+            <p>Your final score: <span id="modal-score"></span></p>
+            <button id="restart-btn">Restart Game</button>
+        </div>
+    </div>
+
+    <a href="index.html" style="text-decoration: none;">
+      <button class="go-home-btn">Go to Home</button>
+      <p1 class="made-by">made by danne ❤️</p1>
+    </a>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="snake_game.js"></script>
+</body>
+</html>

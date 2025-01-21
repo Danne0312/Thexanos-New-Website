@@ -1,0 +1,302 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: #ffffff;
+    color: #1d1d1f;
+    line-height: 1.47059;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Header styles */
+header {
+
+
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease-out;
+}
+
+.logo {
+    color: #1d1d1f;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.xanono-image {
+    height: 44px;
+    border-radius: 8px;
+    animation: pulse 2s infinite;
+}
+
+.new-snake-game-btn {
+
+    background: rgba(0, 113, 227, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 980px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.social-links a {
+    color: #1d1d1f;
+    margin-left: 1.5rem;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.social-links a:hover {
+    color: #800080;
+    transform: scale(1.1);
+}
+
+/* Gamer Details */
+.gamer-stats {
+    padding: 2rem;
+
+    background: rgba(29, 29, 31, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: white;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-out;
+}
+
+.gamer-level {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #800080;
+}
+
+.gamer-achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.achievement {
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Hero section */
+.hero {
+    padding: 4rem 2rem;
+
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.stream-preview {
+    margin-bottom: 3rem;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1.2s ease-out;
+}
+
+.stream-info {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    animation: fadeIn 1.4s ease-out;
+}
+
+.stream-info h1 {
+    font-size: 48px;
+    line-height: 1.08349;
+    font-weight: 600;
+    letter-spacing: -0.003em;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #1d1d1f, #800080);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 3s infinite;
+}
+
+.watch-live-btn {
+    display: inline-block;
+
+    background: rgba(128, 0, 128, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 980px;
+    text-decoration: none;
+    font-size: 17px;
+    line-height: 1.17648;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: pulse 2s infinite;
+}
+
+.watch-live-btn:hover {
+
+    background: rgba(138, 0, 138, 0.9);
+    transform: scale(1.05);
+}
+
+/* Section styles */
+section {
+    padding: 6rem 2rem;
+
+
+    border-bottom: 1px solid rgba(210, 210, 215, 0.3);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeIn 0.8s ease-out;
+}
+
+section h2 {
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #1d1d1f;
+    animation: fadeIn 1s ease-out;
+}
+
+/* YouTube and Twitch sections */
+.youtube-grid, .clips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+    animation: fadeIn 1.2s ease-out;
+}
+
+/* Button section */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeIn 1.4s ease-out;
+}
+
+.action-button {
+
+
+    background: rgba(245, 245, 247, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #1d1d1f;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 1.23536;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.action-button:hover {
+
+    background: rgba(232, 232, 237, 0.8);
+    transform: scale(1.02);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .social-links {
+        margin-top: 1rem;
+    }
+
+    .social-links a {
+        margin: 0 0.75rem;
+    }
+
+    .stream-info h1 {
+        font-size: 32px;
+        line-height: 1.125;
+    }
+
+    section {
+        padding: 3rem 1rem;
+    }
+
+    section h2 {
+        font-size: 32px;
+        line-height: 1.125;
+    }
+
+    .gamer-achievements {
+        grid-template-columns: 1fr;
+    }
+}
