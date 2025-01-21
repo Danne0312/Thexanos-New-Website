@@ -4,41 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="snake_game.css">
-    <style>
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        canvas {
-            border: 2px solid #fff;
-            background-color: #000;
-            display: block;
-            margin: 0 auto;
-        }
-        #start-game-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .go-back-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
-    <h1>Snake Game</h1>
+    <h1>Xannys Snake Game</h1>
     <div class="start-game-container">
         <canvas id="snakeCanvas" width="400" height="400"></canvas>
         <button id="start-game-btn">Start Game</button>
     </div>
-    <!-- Touch Control Buttons -->
+
+    <div id="final-score-container">
+        Final Score: <span id="final-score" data-score-hash=""></span>
+    </div>
+
     <div class="touch-controls">
         <button class="control-btn" id="up-btn">↑</button>
         <div>
@@ -47,17 +25,20 @@
         </div>
         <button class="control-btn" id="down-btn">↓</button>
     </div>
-    <div>
-        <a href="index.html" class="go-back-btn">Go Back</a>
-    </div>
-    <div id="game-over-modal" class="modal">
+
+    <div class="modal" id="game-over-modal">
         <div class="modal-content">
             <h2>Game Over!</h2>
-            <p>Your score: <span id="final-score"></span></p>
+            <p>Your final score: <span id="modal-score"></span></p>
             <button id="restart-btn">Restart Game</button>
         </div>
     </div>
 
-    <script src="snake_game.js" defer></script>
+    <a href="index.html" style="text-decoration: none;">
+      <button class="go-home-btn">Go to Home</button>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="snake_game.js"></script>
 </body>
-</html> 
+</html>
