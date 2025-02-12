@@ -1,5 +1,19 @@
+/* ----------------------------- */
+/* Fade In Animation for the Body */
+/* ----------------------------- */
+body {
+    animation: fadeIn 1s ease-out;
+}
 
-/* Reset and base styles */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------------- */
+/* Reset & Base Styles */
+/* ----------------------------- */
+/* Applies a reset to margins, padding, and sets a global box sizing and font */
 * {
     margin: 0;
     padding: 0;
@@ -7,12 +21,15 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* Set the base background and text color for the page */
 body {
     background-color: #0e0e10;
     color: #efeff1;
 }
 
-/* Header styles */
+/* ----------------------------- */
+/* Header Section Styles */
+/* ----------------------------- */
 .twitch-header {
     background-color: #18181b;
     padding: 1.5rem;
@@ -24,6 +41,7 @@ body {
     border-bottom: 1px solid rgba(145, 71, 255, 0.7);
 }
 
+/* Navigation container within the header */
 .twitch-nav {
     display: flex;
     align-items: center;
@@ -33,6 +51,9 @@ body {
     padding: 0 2rem;
 }
 
+/* ----------------------------- */
+/* Logo Styles & Hover Effects */
+/* ----------------------------- */
 .logo {
     display: flex;
     align-items: center;
@@ -44,35 +65,89 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Creates a shine effect overlay on the logo */
+.logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+}
+
+/* Triggers the shine animation when hovering over the logo */
+.logo:hover::before {
+    animation: shine 0.75s forwards;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Slight scaling on hover for extra emphasis */
 .logo:hover {
     transform: scale(1.05);
-    text-shadow: 0 0 15px rgba(145, 71, 255, 0.4);
 }
 
+/* ----------------------------- */
+/* Continuous Shine Effect */
+/* ----------------------------- */
+.shiny-effect {
+    position: relative;
+    overflow: hidden;
+}
+.shiny-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    opacity: 0;
+    pointer-events: none;
+    animation: shineLoop 10s infinite;
+}
+
+@keyframes shineLoop {
+    0%, 80% {
+        left: -100%;
+        opacity: 0;
+    }
+    85% {
+        opacity: 1;
+    }
+    90% {
+        left: 100%;
+        opacity: 0;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* ----------------------------- */
+/* User Image Styling */
+/* ----------------------------- */
 .xanono-image {
     width: 52px;
     height: 52px;
     border-radius: 50%;
     border: 4px solid #9147ff;
-    box-shadow: 0 0 20px rgba(145, 71, 255, 0.7);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 20px rgba(145, 71, 255, 0.7); }
-    50% { box-shadow: 0 0 30px rgba(145, 71, 255, 0.9); }
-    100% { box-shadow: 0 0 20px rgba(145, 71, 255, 0.7); }
-}
-
-.xanono-image:hover {
-    transform: rotate(360deg) scale(1.15);
-    border-color: #efeff1;
-    border-width: 3px;
-}
-
+/* ----------------------------- */
+/* Navigation Items */
+/* ----------------------------- */
 .nav-item {
     color: #efeff1;
     text-decoration: none;
@@ -85,6 +160,7 @@ body {
     text-shadow: 0 0 1px rgba(239, 239, 241, 0.3);
 }
 
+/* Underline effect for nav items */
 .nav-item::after {
     content: '';
     position: absolute;
@@ -97,6 +173,7 @@ body {
     border-radius: 2px;
 }
 
+/* Hover effects for nav items */
 .nav-item:hover {
     color: #9147ff;
     transform: translateY(-4px);
@@ -107,137 +184,31 @@ body {
     box-shadow: 0 0 10px rgba(145, 71, 255, 0.5);
 }
 
+/* ----------------------------- */
+/* Responsive Styles for Mobile */
+/* ----------------------------- */
 @media screen and (max-width: 768px) {
+    /* Hide text labels in nav items and show only icons */
     .nav-item span {
         display: none;
     }
     
+    /* Adjust icon size and spacing for mobile view */
+    .nav-item {
+        margin: 0 0.5rem;
+        padding: 0.5rem 0;
+    }
+    
     .nav-item i {
-        font-size: 1.5rem;
-        margin: 0 0.8rem;
+        font-size: 1.2rem;
+        margin: 0 0.4rem;
     }
     
     .logo span {
         display: none;
     }
-}
-/* Hero section */
-.hero {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.stream-preview {
-    margin-bottom: 2rem;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.stream-info {
-    text-align: center;
-}
-
-.watch-live-btn {
-    display: inline-block;
-    background-color: #9147ff;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 1rem;
-    transition: background-color 0.2s;
-}
-
-.watch-live-btn:hover {
-    background-color: #772ce8;
-}
-
-/* Section styles */
-.about-section,
-.youtube-section,
-.twitch-clips-section,
-.button-section,
-.updates-section {
-    padding: 3rem 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-
-h2 {
-    color: #efeff1;
-    margin-bottom: 2rem;
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #9147ff, #772ce8);
-    border-radius: 2px;
-}
-
-/* Button styles */
-.button-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.action-button {
-    background: linear-gradient(135deg, #3a3a3d, #464649);
-    color: #efeff1;
-    border: none;
-    padding: 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.action-button:hover {
-    background: linear-gradient(135deg, #464649, #3a3a3d);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-/* Updates section */
-.update-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.update {
-    background-color: #18181b;
-    padding: 1.5rem;
-    border-radius: 10px;
-}
-
-.update h3 {
-    color: #9147ff;
-    margin-bottom: 1rem;
-}
-
-.update p {
-    color: #adadb8;
-    margin-bottom: 0.5rem;
-}
-
-/* Media queries */
-@media (max-width: 768px) {
+    
+    /* Stack navigation items vertically */
     .twitch-nav {
         flex-direction: column;
         gap: 1rem;
@@ -252,11 +223,219 @@ h2::after {
     }
 }
 
-/* Grid layouts */
-.youtube-grid,
-.clips-grid {
+/* ----------------------------- */
+/* Hero Section */
+/* ----------------------------- */
+.hero {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Preview for a stream with rounded corners */
+.stream-preview {
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Centered stream info text */
+.stream-info {
+    text-align: center;
+}
+
+/* ----------------------------- */
+/* Watch Live Button with Hover Effects */
+/* ----------------------------- */
+.watch-live-btn {
+    display: inline-block;
+    background-color: #9147ff;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.2s;
+}
+
+/* Shine effect overlay on the button */
+.watch-live-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+}
+
+/* Trigger shine animation on hover */
+.watch-live-btn:hover::before {
+    animation: shine 0.75s forwards;
+}
+
+/* Change background color on hover */
+.watch-live-btn:hover {
+    background-color: #772ce8;
+}
+
+/* ----------------------------- */
+/* Content Grid Layout */
+/* ----------------------------- */
+/* Creates a responsive grid layout for content sections */
+.content-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts based on screen size */
+    gap: 1.5rem; /* Space between grid items */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* ----------------------------- */
+/* Individual Content Section */
+/* ----------------------------- */
+/* Styles for sections within the content grid */
+.content-section {
+    background-color: #18181b;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    display: grid;
+    gap: 1rem;
+}
+
+/* Adjust grid layout for smaller screens */
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr; /* Stacks elements on small screens */
+    }
+}
+
+/* ----------------------------- */
+/* Button Section */
+/* ----------------------------- */
+/* Layout for sections containing buttons */
+.button-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts based on screen size */
+    gap: 1.5rem; /* Space between grid items */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* ----------------------------- */
+/* Button Grid Layout */
+/* ----------------------------- */
+/* Another grid container specifically for buttons */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts based on screen size */
+    gap: 1.5rem; /* Space between buttons */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* ----------------------------- */
+/* Actions Section */
+/* ----------------------------- */
+/* Special section for action calls-to-action */
+.actions-section {
+    background-color: #18181b;
+    color: #9147ff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+/* Container for action buttons and links */
+.actions-container {
+    display: flex;
+    flex-direction: row; /* Changed from column to row */
     gap: 1rem;
     margin-top: 1rem;
+    justify-content: center; /* Center the buttons horizontally */
+}
+
+/* Styles for buttons inside the actions container */
+.actions-container button {
+    background-color: #9147ff;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Hover effect for both links and buttons in actions */
+.actions-container button:hover {
+    background-color: #772ce8;
+    transform: translateY(-4px);
+}
+
+/* Center items within the actions container on mobile screens */
+@media (max-width: 768px) {
+    .actions-container {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        align-items: center;
+    }
+}
+
+/* ----------------------------- */
+/* Updates Section */
+/* ----------------------------- */
+/* Grid layout for updates */
+.update-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts based on screen size */
+    gap: 1.5rem; /* Space between grid items */
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* Individual update block styling */
+.update {
+    background-color: #18181b;
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Title styling within each update */
+.update h3 {
+    color: #9147ff;
+    margin-bottom: 1rem;
+}
+
+/* Overall updates title styling */
+.updates-title {
+    color: #9147ff;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Paragraph styling within an update */
+.update p {
+    color: #adadb8;
+    margin-bottom: 0.5rem;
 }
