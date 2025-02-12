@@ -27,12 +27,29 @@
     p {
       font-size: 1.2rem;
     }
+    /* Magical button styling */
+    .magical-button {
+      background: linear-gradient(45deg, #9147ff, #772ce8);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-top: 20px;
+    }
+    .magical-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(145, 71, 255, 0.8);
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Exclusive Content</h1>
     <p>Congratulations, brave traveler! You've unlocked the secrets of the Cantina.</p>
+    <button class="magical-button" onclick="window.location.href='https://thexanos.univer.se'">Magical Button</button>
   </div>
 </body>
 </html>
